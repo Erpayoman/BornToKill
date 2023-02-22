@@ -12,9 +12,8 @@ public class FirstAid : MonoBehaviour
         // when the pack is picked up the health for the player is set to maximum and the pack dissapears
         if(other.tag == "Player")
         {
-            Debug.Log("reload");
             Health health = other.gameObject.GetComponent<Health>();
-            health.setCurrentHealth(health.maxHealth);
+            health.setCurrentHealth(health.MaxHealth);
             AudioSource.PlayClipAtPoint(rewardSound, this.transform.position,volumeFX);
             gameObject.SetActive(false);
             

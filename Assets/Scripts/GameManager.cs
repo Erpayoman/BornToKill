@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             if (EnemiesAlive == 0) PlayerWins();
 
             if (PlayerIsDeath) PlayerLoses();
-        }       
+        }      
 
 
     }
@@ -75,8 +75,8 @@ public class GameManager : MonoBehaviour
         }
 
         //Restart Spawner and enemies count
-        Spawner.instance.enemiesToRespawn = Spawner.instance.enemiesOnLevel;
-        EnemiesAlive = Spawner.instance.enemiesOnLevel;
+        Spawner.Instance.enemiesToRespawn = Spawner.Instance.enemiesOnLevel;
+        EnemiesAlive = Spawner.Instance.enemiesOnLevel;
         
         //Destroy player and create a new one.
         Destroy(player);        

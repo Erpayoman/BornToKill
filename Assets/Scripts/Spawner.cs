@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
-    public static Spawner instance;
+    public static Spawner Instance;
     public int enemiesOnLevel = 10;    
     public Text countUI;
     public Transform[] spawnPoints;
@@ -22,9 +22,9 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if(Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {

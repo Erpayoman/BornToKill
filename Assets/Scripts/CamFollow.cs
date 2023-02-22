@@ -5,8 +5,8 @@ using UnityEngine;
 public class CamFollow : MonoBehaviour {
 
     
-    public Transform target;    
-    public float smoothTime = .15f;
+    [SerializeField] Transform target;    
+    [SerializeField] float smoothTime = .15f;
 
     Vector3 velocity = Vector3.zero;
     Vector3 offset;

@@ -1,21 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooter : MonoBehaviour,Shooter
+public class PlayerShooter : Shooter,IPoolBullets,IShooter
+
 {
     
-    public GameObject projectile;
-    public GameObject cannonGun;
-    public float fireDelta = 0.5F;
-    public float speed = 10.0f;
-    public AudioSource audioSrcGun;
-
-    float nextFire = 0.5F;
-    GameObject newProjectile;
+    [SerializeField] float fireRate = 0.5F;
+    
+    //GameObject newProjectile;
     float myTime = 0.0F;
     bool canFire = true;
-    GameObject bulletParent;
+    //GameObject bulletParent;
+    List<GameObject> bullets = new List<GameObject>();
     
 
     void Start()
@@ -30,28 +28,68 @@ public class PlayerShooter : MonoBehaviour,Shooter
         {
             myTime = myTime + Time.deltaTime;
 
-            if (Input.GetButton("Fire1") && myTime > nextFire)
+            if (Input.GetButton("Fire1") && myTime > fireRate)
             {
                 FireProjectile();
-
-                nextFire = fireDelta;
+                
                 myTime = 0.0F;
             }
         }
         
     }
-    private void FireProjectile()
+    protected override void FireProjectile()
     {
         audioSrcGun.Play();
-        newProjectile = Instantiate(projectile, cannonGun.transform.position, cannonGun.transform.rotation) as GameObject;
+        GameObject newProjectile;
+        
+        if (bullets.Count == 0 || (bullets.Count > 0 && GetInactiveBullet() == null))
+        {
+            newProjectile = Instantiate(projectile, cannonGun.transform.position, cannonGun.transform.rotation) as GameObject;
+            newProjectile.transform.parent = bulletParent.transform;
+            newProjectile.GetComponent<PoolBullet>().speed = speedFire;
+            newProjectile.GetComponent<PoolBullet>().shooter = this;
+            bullets.Add(newProjectile);
+
+        }
+        else 
+        {
+            newProjectile = GetInactiveBullet();//bullets[bullets.Count -1];
+            newProjectile.transform.position = cannonGun.transform.position;
+            newProjectile.transform.rotation = cannonGun.transform.rotation;
+            newProjectile.SetActive(true);
+
+        }       
+       
         newProjectile.transform.parent = bulletParent.transform;
 
-        newProjectile.GetComponent<Rigidbody>().velocity = newProjectile.transform.forward * speed;
+        newProjectile.GetComponent<Rigidbody>().velocity = newProjectile.transform.forward * speedFire;
 
-        Destroy(newProjectile, 2f);
+        
     }
-    public void CanFire(bool value)
+
+    private GameObject GetInactiveBullet()
     {
-        canFire = value;
+        foreach(GameObject bullet in bullets)
+        {
+            if (bullet.activeSelf == false) return bullet;
+        }
+        return null;
+    }
+
+    
+
+    public void AddBulletPool(GameObject bullet)
+    {
+        bullets.Add(bullet);
+    }
+
+    public void RemoveBulletPool(GameObject bullet)
+    {
+        bullets.Remove(bullet);
+    }
+
+    public void CanFire(bool canFire)
+    {
+        this.canFire = canFire;
     }
 }

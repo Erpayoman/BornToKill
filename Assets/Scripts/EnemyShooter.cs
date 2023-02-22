@@ -2,35 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooter : MonoBehaviour,Shooter
+public class EnemyShooter : Shooter,IShooter
 {
    
-    [SerializeField] GameObject projectile;
-    [SerializeField] GameObject cannonGun;
-    [SerializeField] float speed = 10.0f;
-    [SerializeField] AudioSource audioSrcGun;
-   
-    GameObject newProjectile;    
-    GameObject bulletParent;
-
     private void Awake()
     {
         bulletParent = GameObject.FindGameObjectWithTag("Bullets");
-    }
-       
+    }      
    
-    private void FireProjectile()
+    protected override void FireProjectile()
     {
 
-        audioSrcGun.Play();
-
+        audioSrcGun.Play();        
+        
         newProjectile = Instantiate(projectile, cannonGun.transform.position, cannonGun.transform.rotation) as GameObject;
+        newProjectile.transform.parent = bulletParent.transform;         
+            
+        
         newProjectile.transform.parent = bulletParent.transform;
 
-        newProjectile.GetComponent<Rigidbody>().velocity = newProjectile.transform.forward * speed;
-
-        Destroy(newProjectile, 2.5f);
+        newProjectile.GetComponent<Rigidbody>().velocity = newProjectile.transform.forward * speedFire;
     }
+    
     //Only shoot when the player is near 
     private void OnTriggerEnter(Collider other)
     {
@@ -57,4 +50,7 @@ public class EnemyShooter : MonoBehaviour,Shooter
             CancelInvoke();
         }
     }
+
+   
+    
 }

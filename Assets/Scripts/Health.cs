@@ -5,80 +5,33 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
-    public Slider slider;
-    public int maxHealth = 100;
-    
-    public int bulletDamage = 10;
-    public bool isdeath = false;
+    [SerializeField] protected Slider slider;
+    [SerializeField] protected int maxHealth = 100;    
+    [SerializeField] protected int bulletDamage = 10;
+
+    protected bool isDead = false;
+
+    public int MaxHealth { get { return maxHealth; } }
+    public bool IsDead  { get { return isDead; } }
 
 
-    int currentHealth;
-    bool isEnemy = false;
-    Animator anim;
-    SphereCollider EnemyCollider;
-    NavMeshAgent enemyAIAgent;
-    Shooter shooter;
-    
-    
-
+    protected int currentHealth;
+    protected bool isEnemy = false;
+    protected Animator anim;
    
-    private void Start()
+    protected virtual void Start()
     {
-        isEnemy = (this.tag == "Player") ? false : true;
-
-        if (isEnemy)
-        {
-            enemyAIAgent = GetComponent<NavMeshAgent>();
-            EnemyCollider = GetComponent<SphereCollider>();
-
-        }
-
         currentHealth = maxHealth;
-        anim = GetComponent<Animator>();
-        shooter = GetComponent<Shooter>();
+        anim = GetComponent<Animator>();        
         
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-
-        if (isdeath) return;
-
-        if (collision.gameObject.tag != "PlayerBullet" && collision.gameObject.tag != "EnemyBullet") return;
-
-        if((isEnemy && collision.gameObject.tag == "PlayerBullet")|| (!isEnemy && collision.gameObject.tag == "EnemyBullet"))
-        {
-            currentHealth -= bulletDamage;
-            slider.value = currentHealth;
-        }
-
-        if (currentHealth <= 0) die();
-
-
-    }
-    private void die()
-    {
-        if(isEnemy)
-        {
-            enemyAIAgent.enabled = false;//this stop navegation
-            EnemyCollider.enabled = false;// this stop the detection of the player and the automatic fire
-            GameManager.EnemiesAlive--;
-        }
-        else
-        {
-            GameManager.PlayerIsDeath = true;
-        }
-        
-
-        isdeath = true;
-        shooter.CanFire(false);
-        slider.gameObject.SetActive(false);
-        anim.SetTrigger("die");        
-
-
-    }
+    protected abstract void OnCollisionEnter(Collision collision);
+    
+    protected abstract void die();
+   
     public void setCurrentHealth(int health)
     {
         currentHealth = health;

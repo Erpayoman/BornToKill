@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	void FixedUpdate ()
     {
-        if (health.isdeath) return;
+        if (health.IsDead) return;
 
         HorizontalVerticalMovement();//Keyboard awsd
         RotationMovement();//mouse
