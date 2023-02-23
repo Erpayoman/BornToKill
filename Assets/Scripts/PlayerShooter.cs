@@ -7,12 +7,10 @@ public class PlayerShooter : Shooter,IPoolBullets,IShooter
 
 {
     
-    [SerializeField] float fireRate = 0.5F;
+    [SerializeField] float fireRate = 0.5F;    
     
-    //GameObject newProjectile;
     float myTime = 0.0F;
-    bool canFire = true;
-    //GameObject bulletParent;
+    bool canFire = true;    
     List<GameObject> bullets = new List<GameObject>();
     
 

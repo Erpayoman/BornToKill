@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class StartScreen : MonoBehaviour
 {
-    public RectTransform[] children;
+    RectTransform[] StartScreenComponents;
 
     private void Awake()
     {
-        children = this.GetComponentsInChildren<RectTransform>(true);
+        StartScreenComponents = this.GetComponentsInChildren<RectTransform>(true);
     }
     private void Start()
     {
@@ -30,9 +30,9 @@ public class StartScreen : MonoBehaviour
 
     private void TurnOnTitles(bool value)
     {
-        for(int index = 1; index < children.Length; index ++)
+        for(int index = 1; index < StartScreenComponents.Length; index ++)
         {
-            children[index].gameObject.SetActive(value);
+            StartScreenComponents[index].gameObject.SetActive(value);
         }
     }
 

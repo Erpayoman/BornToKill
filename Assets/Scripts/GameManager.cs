@@ -75,8 +75,9 @@ public class GameManager : MonoBehaviour
         }
 
         //Restart Spawner and enemies count
-        Spawner.Instance.enemiesToRespawn = Spawner.Instance.enemiesOnLevel;
-        EnemiesAlive = Spawner.Instance.enemiesOnLevel;
+        Spawner.Instance.EnemiesToRespawn = Spawner.Instance.EnemiesOnLevel;
+        EnemiesAlive = Spawner.Instance.EnemiesOnLevel;
+        
         
         //Destroy player and create a new one.
         Destroy(player);        

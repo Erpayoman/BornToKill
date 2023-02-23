@@ -157,7 +157,7 @@ MonoBehaviour:
   OnInvisible:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114209793791966204}
         m_MethodName: OnBecameInvisible
         m_Mode: 1
         m_Arguments:

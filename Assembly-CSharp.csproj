@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Models\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
      <Compile Include="Assets\Scripts\AIEnemy.cs" />
      <Compile Include="Assets\Scripts\CamFollow.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
@@ -71,6 +72,8 @@
      <Compile Include="Assets\Scripts\Shooter.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\StartScreen.cs" />
+     <None Include="Assets\Models\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
+     <None Include="Assets\Models\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Projects/MyGit/BornToKill/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -263,6 +266,9 @@
  <Reference Include="Unity.Locator">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.13f1/Editor/Data/Managed/Unity.Locator.dll</HintPath>
  </Reference>
+ <Reference Include="Assembly-CSharp-firstpass">
+ <HintPath>C:/Projects/MyGit/BornToKill/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.13f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -314,10 +320,6 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.13f1/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{BE4A964B-501A-4851-4C80-DDF54C96ED44}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

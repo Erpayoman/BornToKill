@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
 
         moveDirection = new Vector3(horizontal, 0f, vertical);
-
+        moveDirection = moveDirection.normalized;
         
         rigidbody.MovePosition(transform.position + ((transform.forward * vertical) + (transform.right * horizontal)) * speed * Time.deltaTime);
         

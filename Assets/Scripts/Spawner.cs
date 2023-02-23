@@ -7,17 +7,21 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     public static Spawner Instance;
-    public int enemiesOnLevel = 10;    
-    public Text countUI;
-    public Transform[] spawnPoints;
-    public GameObject[] enemyPrefabs;
-    public Transform enemyParent;
 
-    [HideInInspector]
-    public int enemiesToRespawn;
+    [SerializeField] int enemiesOnLevel = 10;    
+    [SerializeField] Text countUI;
+    [SerializeField] Transform[] spawnPoints;
+    [SerializeField] GameObject[] enemyPrefabs;
+    [SerializeField] Transform enemyParent;
 
+    int enemiesToRespawn;
     float timeToSpawn = 0.5f;
     float currentTime = 0.0f;
+
+    public int EnemiesOnLevel { get { return enemiesOnLevel; } private set { enemiesOnLevel = value; } }
+    public int EnemiesToRespawn { get { return enemiesToRespawn; } set { enemiesToRespawn = value; } }
+
+
     // Use this for initialization
 
     private void Awake()
